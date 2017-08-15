@@ -70,11 +70,11 @@ Author URI: https://www.facebook.com/cindy.alisia
               ),
               array(
                   'id'  => 'image',
-				          'name'  => esc_html__( 'Image Upload', 'textdomain' ),
-				          'type' => 'image_upload',
-				          'force_delete'     => false,
-				          'max_file_uploads' => 1,
-				          'max_status'       => true,
+		  'name'  => esc_html__( 'Image Upload', 'textdomain' ),
+	          'type' => 'image_upload',
+	          'force_delete'     => false,
+	          'max_file_uploads' => 1,
+		  'max_status'       => true,
               ),
 
             ));

@@ -115,28 +115,38 @@ Author URI: https://www.facebook.com/cindy.alisia
 
       <div class="member_data">
         <h3><?php echo the_title(); ?></h3>
-        <?php if(get_post_meta( get_the_ID(), 'email', true)!= NULL){
-            echo esc_html( get_post_meta( get_the_ID(), 'email', true ) );
-        }
-        else{
-            echo "Have no Email";
-        }
+        <?php
+            $upload = wp_get_attachment_image( get_post_meta( get_the_ID(), 'imgadv', 1 ), 'thumbnail' );
+            echo $upload;
         ?> <br>
-        <?php if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
-            echo esc_html(get_post_meta( get_the_ID(), 'phone_number', true ));
-        }
-        else{
-            echo "Have no phone number";
-        }
-        ?> <br>
-        <?php if(get_post_meta( get_the_ID(), 'website', true) != NULL){
-            echo esc_html( get_post_meta( get_the_ID(), 'website', true));
-        }
-        else{
-            echo "Have no Website";
-        }
-        ?> <br>
-    </div>
+        <?php
+          if(get_post_meta( get_the_ID(), 'email', true)!= NULL){
+              echo esc_html( get_post_meta( get_the_ID(), 'email', true ) );
+          }
+          else{
+              echo "Have no Email";
+          }
+        ?>
+        <br>
+        <?php
+          if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
+              echo esc_html(get_post_meta( get_the_ID(), 'phone_number', true ));
+          }
+          else{
+              echo "Have no phone number";
+          }
+        ?>
+        <br>
+        <?php
+          if(get_post_meta( get_the_ID(), 'website', true) != NULL){
+              echo esc_html( get_post_meta( get_the_ID(), 'website', true));
+          }
+          else{
+              echo "Have no Website";
+          }
+        ?>
+        <br>
+      </div>
     <?php
     endwhile;
   }

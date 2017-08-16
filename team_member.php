@@ -113,40 +113,64 @@ Author URI: https://www.facebook.com/cindy.alisia
       while ( $connectedtab->have_posts() ) : $connectedtab->the_post();
       ?>
 
-      <div class="member_data">
-        <h3><?php echo the_title(); ?></h3>
-        <?php
-            $upload = wp_get_attachment_image( get_post_meta( get_the_ID(), 'imgadv', 1 ), 'thumbnail' );
-            echo $upload;
-        ?> <br>
-        <?php
-          if(get_post_meta( get_the_ID(), 'email', true)!= NULL){
-              echo esc_html( get_post_meta( get_the_ID(), 'email', true ) );
-          }
-          else{
-              echo "Have no Email";
-          }
-        ?>
-        <br>
-        <?php
-          if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
-              echo esc_html(get_post_meta( get_the_ID(), 'phone_number', true ));
-          }
-          else{
-              echo "Have no phone number";
-          }
-        ?>
-        <br>
-        <?php
-          if(get_post_meta( get_the_ID(), 'website', true) != NULL){
-              echo esc_html( get_post_meta( get_the_ID(), 'website', true));
-          }
-          else{
-              echo "Have no Website";
-          }
-        ?>
-        <br>
-      </div>
+      <table class="member_data">
+        <tr style="padding-right: 120px;">
+            <td>
+                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                      <?php echo the_title(); ?>
+                <?php endwhile ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                    <?php
+                        $upload = wp_get_attachment_image( get_post_meta( get_the_ID(), 'imgadv', 1 ), 'thumbnail' );
+                        echo $upload;
+                    endwhile
+                  ?>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                    <?php if(get_post_meta( get_the_ID(), 'email', true)!= NULL){
+                        echo esc_html( get_post_meta( get_the_ID(), 'email', true ) );
+                    }
+                    else{
+                        echo "Have no Email";
+                    }
+                    endwhile
+                  ?>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                    <?php if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
+                        echo esc_html(get_post_meta( get_the_ID(), 'phone_number', true ));
+                    }
+                    else{
+                        echo "Have no phone number";
+                    }
+                    endwhile
+                  ?>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                    <?php if(get_post_meta( get_the_ID(), 'website', true) != NULL){
+                        echo esc_html( get_post_meta( get_the_ID(), 'website', true));
+                    }
+                    else{
+                        echo "Have no Website";
+                    }
+                    endwhile
+                  ?>
+            </td>
+          </tr>
+      </table>
     <?php
     endwhile;
   }

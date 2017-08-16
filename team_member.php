@@ -69,12 +69,12 @@ Author URI: https://www.facebook.com/cindy.alisia
                   'type' => 'text',
               ),
               array(
-                  'id'  => 'image',
-		  'name'  => esc_html__( 'Image Upload', 'textdomain' ),
-	          'type' => 'image_upload',
-	          'force_delete'     => false,
-	          'max_file_uploads' => 1,
-		  'max_status'       => true,
+                  'name'             => esc_html__( 'Image Advanced Upload (Recommended)', 'your-prefix' ),
+                  'id'               => 'imgadv',
+                  'type'             => 'image_advanced',
+                  'force_delete'     => false,
+                  'max_file_uploads' => 1,
+                  'max_status'       => true,
               ),
 
             ));
@@ -109,71 +109,67 @@ Author URI: https://www.facebook.com/cindy.alisia
       $connectedtab = new WP_Query( array(
           'post_type' => 'team_members',
       ));
-
-      while ( $connectedtab->have_posts() ) : $connectedtab->the_post();
+      $upload = rwmb_meta( 'gallery', 'type=image&size=YOURSIZE' );
+      //while ( $connectedtab->have_posts()) : $connectedtab->the_post();
       ?>
 
-      <table class="member_data">
-        <tr style="padding-right: 120px;">
-            <td>
-                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+      <table style="width: 80%; background-color: #F5DA81">
+        <tr>
+            <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                  <th style="text-align: center;">
                       <?php echo the_title(); ?>
-                <?php endwhile ?>
-            </td>
+                  </th>
+            <?php endwhile ?>
         </tr>
         <tr>
-            <td>
-                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+            <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                  <td style="text-align: center;">
                     <?php
                         $upload = wp_get_attachment_image( get_post_meta( get_the_ID(), 'imgadv', 1 ), 'thumbnail' );
                         echo $upload;
-                    endwhile
-                  ?>
-            </td>
+                    ?>
+                  </td>
+            <?php endwhile ?>
           </tr>
           <tr>
-            <td>
-                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+              <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                  <td style="text-align: center;">
                     <?php if(get_post_meta( get_the_ID(), 'email', true)!= NULL){
                         echo esc_html( get_post_meta( get_the_ID(), 'email', true ) );
                     }
                     else{
                         echo "Have no Email";
-                    }
-                    endwhile
-                  ?>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
-                    <?php if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
+                    } ?>
+                  </td>
+              <?php endwhile ?>
+          </tr>
+          <tr>
+              <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                <td style="text-align: center;">
+                  <?php if (get_post_meta( get_the_ID(), 'phone_number', true ) != NULL ){
                         echo esc_html(get_post_meta( get_the_ID(), 'phone_number', true ));
                     }
                     else{
                         echo "Have no phone number";
-                    }
-                    endwhile
-                  ?>
-              </td>
+                    } ?>
+                  </td>
+                <?php endwhile ?>
             </tr>
             <tr>
-              <td>
                 <?php while ( $connectedtab->have_posts()) : $connectedtab->the_post(); ?>
+                  <td style="text-align: center;">
                     <?php if(get_post_meta( get_the_ID(), 'website', true) != NULL){
                         echo esc_html( get_post_meta( get_the_ID(), 'website', true));
                     }
                     else{
                         echo "Have no Website";
-                    }
-                    endwhile
-                  ?>
-            </td>
-          </tr>
+                    } ?>
+                  </td>
+                <?php endwhile ?>
+            </tr>
       </table>
     <?php
-    endwhile;
   }
-  
+
   add_shortcode('member_information', 'show_member_information');
 ?>
